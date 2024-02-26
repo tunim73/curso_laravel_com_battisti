@@ -16,6 +16,30 @@
 
     </head>
     <body>
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="collapse navbar-collapse" id="navbar">
+            <a href="/" class="navbar-brand">
+              <img src="/img/hdcevents_logo.svg" alt="logo" class="">
+            </a>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="/" class="nav-link">Eventos</a>
+              </li>
+              <li class="nav-item">
+                <a href="/" class="nav-link">Criar enventos</a>
+              </li>
+              <li class="nav-item">
+                <a href="/" class="nav-link">Entrar</a>
+              </li>
+              <li class="nav-item">
+                <a href="/" class="nav-link">Cadastrar</a>
+              </li>
+            </ul>
+          </div>  
+        </nav>
+      </header>
+
         @yield('content')
         <footer>
           <p>
