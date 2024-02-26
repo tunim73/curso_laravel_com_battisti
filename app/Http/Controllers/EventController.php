@@ -31,9 +31,26 @@ class EventController extends Controller
    */
   public function store(StoreEventRequest $request)
   {
-    $event = Event::create($request->all());
 
-    return redirect('/');
+    $data = $request->all();
+
+    if ($request->hasFile('image') && $request->file('image')->isValid()) {
+      $requestImage = $request->image;
+
+      $extension = $requestImage->extension();
+
+      $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+      $requestImage->move(public_path('img/events'), $imageName);
+
+      $data['image'] = $imageName;
+    } else {
+      $data['image'] = '';
+    }
+
+    Event::create($data);
+
+    return redirect('/')->with('msg', "Evento criado com sucesso");
   }
 
   /**
