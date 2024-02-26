@@ -19,7 +19,9 @@
       <img src="/img/events/{{$event->image}}" alt="{{ $event->title}}">
       <div class="card-body">
         <p> {{$event->image}} </p>
-        <p class="card-date">10/09/2020</p>
+        {{--Formatação de data ! Perceba que com 'y' o resultado é diferente e relevante date('d/m/y',
+        strtotime($event->date)) --}}
+        <p class="card-date">{{date('d/m/Y', strtotime($event->date)) }}</p>
         <h5 class="card-title">{{ $event->title }}</h5>
         <p class="card-participants">X Participantes</p>
         <a href="/events/{{$event->id}}" class="btn btn-primary">Saber mais</a>
