@@ -21,3 +21,13 @@ Route::controller(EventController::class)->group(function () {
   Route::post('/events', 'store');
 });
 
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
