@@ -20,6 +20,7 @@ Route::controller(EventController::class)->group(function () {
   Route::get('/dashboard', "dashboard")->name('dashboard')->middleware('auth');
   Route::get('/events/{id}', "show");
   Route::post('/events', 'store');
+  Route::delete('/events/{id}', 'destroy');
 });
 
 

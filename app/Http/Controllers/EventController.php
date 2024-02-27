@@ -112,9 +112,10 @@ class EventController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Event $event)
+  public function destroy($id)
   {
-    //
+      Event::findOrFail($id)->delete();
+      return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso!');
   }
 
 
