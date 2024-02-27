@@ -96,17 +96,41 @@ class EventController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Event $event)
+  public function edit($id)
   {
-    //
+      $user = auth()->user();
+
+      $event = Event::findOrFail($id);
+
+      if($user->id != $event->user_id) {
+          return redirect('/dashboard');
+      }
+
+      return view('events.edit', ['event' => $event]);
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(UpdateEventRequest $request, Event $event)
+  public function update(UpdateEventRequest $request)
   {
-    //
+      $data = $request->all();
+
+      if ($request->hasFile('image') && $request->file('image')->isValid()) {
+          $requestImage = $request->image;
+
+          $extension = $requestImage->extension();
+
+          $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+          $requestImage->move(public_path('img/events'), $imageName);
+
+          $data['image'] = $imageName;
+      }
+
+      Event::findOrFail($request->id)->update($data);
+
+      return redirect('/dashboard')->with('msg', 'Evento editado com sucesso!');
   }
 
   /**
