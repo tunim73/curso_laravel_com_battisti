@@ -24,7 +24,7 @@ Route::controller(EventController::class)->group(function () {
   Route::put('/events/{id}', 'update')->middleware('auth');
   Route::delete('/events/{id}', 'destroy')->middleware('auth');
   Route::post('/events/join/{id}', 'joinEvent')->middleware('auth');
-
+    Route::delete('/events/leave/{id}', 'leaveEvent')->middleware('auth');
 });
 
 
