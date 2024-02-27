@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::controller(EventController::class)->group(function () {
   Route::get('/', "index");
   Route::get('/events/create', "create")->middleware('auth');
+  Route::get('/dashboard', "dashboard")->name('dashboard')->middleware('auth');
   Route::get('/events/{id}', "show");
   Route::post('/events', 'store');
 });
 
 
-Route::middleware([
+/* Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
@@ -30,4 +31,4 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
+}); */
