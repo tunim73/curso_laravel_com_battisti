@@ -55,6 +55,11 @@ class EventController extends Controller
       $data['image'] = '';
     }
 
+    $user = auth()->user();
+    $userId = $user->id;
+
+    $data['user_id'] = $userId;
+
     Event::create($data);
 
     return redirect('/')->with('msg', "Evento criado com sucesso");
