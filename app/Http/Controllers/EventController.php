@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 
 class EventController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
   {
     $search = request('search');
 
@@ -28,7 +31,7 @@ class EventController extends Controller
   /**
    * Show the form for creating a new resource.
    */
-  public function create()
+  public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
   {
     return view('events.create');
   }
@@ -68,11 +71,27 @@ class EventController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show($id)
+  public function show($id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
   {
     $event = Event::findOrFail($id);
     return view('events.show', ['event' => $event]);
   }
+
+  public function dashboard(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+  {
+
+    $user = auth()->user();
+
+    $events = $user->events;
+
+    return view(
+      'events.dashboard',
+      ['events' => $events]
+    );
+
+  }
+
+
 
   /**
    * Show the form for editing the specified resource.
@@ -97,4 +116,8 @@ class EventController extends Controller
   {
     //
   }
+
+
+
+
 }
