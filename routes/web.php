@@ -16,13 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(EventController::class)->group(function () {
   Route::get('/', "index");
-  Route::get('/events/create', "create")->middleware('auth');
   Route::get('/dashboard', "dashboard")->name('dashboard')->middleware('auth');
+  Route::get('/events/create', "create")->middleware('auth');
   Route::get('/events/{id}', "show");
   Route::get('/events/edit/{id}', "edit")->middleware('auth');
   Route::post('/events', 'store')->middleware('auth');
   Route::put('/events/{id}', 'update')->middleware('auth');
   Route::delete('/events/{id}', 'destroy')->middleware('auth');
+  Route::post('/events/join/{id}', 'joinEvent')->middleware('auth');
+
 });
 
 
